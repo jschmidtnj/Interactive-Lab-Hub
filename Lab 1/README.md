@@ -9,7 +9,6 @@ For lab this week, we draw on this and other inspirations from theatre to stage 
 _Make sure you read all the instructions and understand the whole of the laboratory activity before starting!_
 
 
-
 ## Prep
 
 ### To start the semester, you will need:
@@ -75,7 +74,9 @@ In this lab I will be making a tool for showing information about public transit
 
 Sketch a storyboard of the interactions you are planning. It does not need to be perfect, but must get across the behavior of the interactive device and the other characters in the scene.
 
-\*\***Include a picture of your storyboard here**\*\*
+![storyboard](./pictures/storyboard.jpg)
+
+
 
 Present your idea to the other people in your breakout room. You can just get feedback from one another or you can work together on the other parts of the lab.
 
@@ -117,9 +118,13 @@ Only now should you start worrying about what the device should look like. Devel
 
 Think about the setting of the device: is the environment a place where the device could overheat? Is water a danger? Does it need to have bright colors in an emergency setting?
 
-\*\***Include sketches of what your device might look like here.**\*\*
+![top view](./pictures/top_view.jpg)
 
-\*\***What concerns or opportunities are influencing the way you've designed the device to look?**\*\*
+![side view](./pictures/side_view.jpg)
+
+![3D view](./pictures/3D_view.jpg)
+
+The main concern is that the device needs to be bright enough in order for the user to be able to see it and distinguish between the different modes of transportation. Since it is going to be placed on a kitchen counter, it also needs to be somewhat waterproof, to prevent water from corroding and damaging the microcontroller. The device should also be interesting to look at and spark curiosity, since it is a decorative device. 
 
 
 ## Part F. Record
@@ -134,7 +139,6 @@ I had many influences when completing this lab, including Hayden Daly and Rohan 
 # Staging Interaction, Part 2 
 
 This describes the second week's work for this lab activity.
-
 
 ## Prep (to be done before Lab on Wednesday)
 
