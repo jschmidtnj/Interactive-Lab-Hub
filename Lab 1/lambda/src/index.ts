@@ -109,7 +109,7 @@ const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
 };
 
 const authorize = (event: APIGatewayProxyEventV2): void => {
-  const authorizationKey = 'Authorization';
+  const authorizationKey = 'authorization';
   if (!(authorizationKey in event.headers)) {
     throw new Error('cannot find authorization in headers');
   }
@@ -125,9 +125,9 @@ const authorize = (event: APIGatewayProxyEventV2): void => {
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
-    authorize(event);
     initializeConfig();
     initializeLogger();
+    authorize(event);
     const limit = 5;
     const subwayData = await getSubwayData(limit);
     const ferryData = await getFerryData(limit);

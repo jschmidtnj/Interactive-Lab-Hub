@@ -5,18 +5,20 @@
 # abort on errors
 set -e
 
-source_folder="src"
+source_folder="lib"
+output="dist.zip"
 
-# delete gitignored files
+cp package.json "$source_folder"
+
 cd "$source_folder"
-git clean -xdf
+yarn install --prod
 cd - > /dev/null
 
-dist_folder="dist"
-
-rm -rf "$dist_folder"
-mkdir "$dist_folder"
-
-cp -LR "$source_dir/." "$dist_folder"
+rm -f "$output"
+cd "$source_folder"
+zip -r "$output" *
+mv "$output" ..
+rm -rf node_modules yarn.lock package.json
+cd - > /dev/null
 
 exit 0
