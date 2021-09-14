@@ -1,3 +1,6 @@
 .DS_Store
 *.tflite
 *.scorer
+
+# ignore config files
+*.env
