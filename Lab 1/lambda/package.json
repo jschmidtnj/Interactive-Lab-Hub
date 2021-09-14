@@ -32,7 +32,9 @@
   },
   "homepage": "https://github.com/jschmidtnj/Interactive-Lab-Hub#readme",
   "dependencies": {
+    "adm-zip": "^0.5.6",
     "axios": "^0.21.4",
+    "csvtojson": "^2.0.10",
     "date-fns": "^2.23.0",
     "date-fns-tz": "^1.1.6",
     "dotenv": "^10.0.0",
@@ -48,6 +50,7 @@
   },
   "bin": "lib/index.js",
   "devDependencies": {
+    "@types/adm-zip": "^0.4.34",
     "@types/aws-lambda": "^8.10.83",
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.14",

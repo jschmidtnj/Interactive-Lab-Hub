@@ -1,18 +1,20 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyHandlerV2 } from 'aws-lambda';
-import { APIPassword, ferryAPI, ferryStopID, FSubwayStopID, initializeConfig, mtaAPIKey, timezone, subwayAPI } from './config';
+import * as config from './config';
 import { initializeLogger } from './logger';
 import axios from 'axios';
 import GTFSRealtimeBindings from 'gtfs-realtime-bindings-transit';
 import HTTPStatus from 'http-status-codes';
 import { utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
-import { addMinutes, format, roundToNearestMinutes } from 'date-fns';
+import { addMinutes, format, parse, roundToNearestMinutes } from 'date-fns';
+import AdmZip from 'adm-zip';
+import csv from 'csvtojson';
 
-const convertToTimezone = (dates: Date[]) => dates.map(date => utcToZonedTime(date, timezone));
+export const convertToTimezone = (dates: Date[]): Date[] => dates.map(date => utcToZonedTime(date, config.timezone));
 
 const getSubwayData = async (limit: number | undefined = undefined, useTimezone = false): Promise<Date[]> => {
-  const subwayRes = await axios.get(subwayAPI, {
+  const subwayRes = await axios.get(config.subwayRealtimeAPI, {
     headers: {
-      'x-api-key': mtaAPIKey
+      'x-api-key': config.mtaAPIKey
     },
     responseType: 'arraybuffer'
   });
@@ -27,7 +29,7 @@ const getSubwayData = async (limit: number | undefined = undefined, useTimezone 
       continue;
     }
     for (const update of entity.tripUpdate.stopTimeUpdate) {
-      if (update.stopId !== FSubwayStopID || !update.arrival) {
+      if (update.stopId !== config.FSubwayStopID || !update.arrival) {
         continue;
       }
       const timestamp = new Number(update.arrival.time);
@@ -47,31 +49,44 @@ const getSubwayData = async (limit: number | undefined = undefined, useTimezone 
   return subwayTimes;
 };
 
-const getFerryData = async (limit: number | undefined = undefined, useTimezone = false): Promise<Date[]> => {
-  const ferryRes = await axios.get(ferryAPI, {
+const getStaticFerryData = async (limit: number | undefined = undefined, useTimezone = false): Promise<{times: Date[], id: string}> => {
+  const ferryRes = await axios.get(config.ferryStaticAPI, {
     responseType: 'arraybuffer'
   });
   if (ferryRes.status !== HTTPStatus.OK) {
-    throw new Error('invalid status code for ferry data');
+    throw new Error('invalid status code for ferry static data');
   }
-  const data = GTFSRealtimeBindings.transit_realtime.FeedMessage.decode(ferryRes.data);
 
-  let ferryTimes: Date[] = [];
-  for (const entity of data.entity) {
-    if (!entity.tripUpdate || !entity.tripUpdate.stopTimeUpdate) {
-      continue;
-    }
-    for (const update of entity.tripUpdate.stopTimeUpdate) {
-      if (update.stopId !== String(ferryStopID) || !update.arrival) {
-        continue;
-      }
-      const timestamp = new Number(update.arrival.time);
-      if (!timestamp) {
-        continue;
-      }
-      ferryTimes.push(new Date(timestamp.valueOf() * 1000));
-    }
+  const zip = new AdmZip(ferryRes.data);
+  const entries = zip.getEntries();
+
+  const stops = entries.find(entry => entry.name === 'stops.txt');
+  if (!stops) {
+    throw new Error('cannot find stops file');
   }
+  const stopsData = await csv().fromString(stops.getData().toString());
+  const stop = stopsData.find(stop => stop.stop_name === config.ferryStopName);
+  if (!stop) {
+    throw new Error('cannot find ferry stop');
+  }
+  const stopID: string = stop.stop_id;
+
+  const stopTimes = entries.find(entry => entry.name === 'stop_times.txt');
+  if (!stopTimes) {
+    throw new Error('cannot find stop times file');
+  }
+  const stopTimesData = await csv().fromString(stopTimes.getData().toString());
+
+  const givenFerryStops: Record<string, string>[] = stopTimesData.filter(stop => stop.stop_id === stopID);
+  const ferryTimesStr = givenFerryStops.map(stop => stop.arrival_time);
+
+  let currentTime = new Date();
+  let ferryTimes: Date[] = [];
+  for (const ferryTimeStr of ferryTimesStr) {
+    currentTime = parse(ferryTimeStr, 'HH:mm:ss', currentTime);
+    ferryTimes.push(currentTime);
+  }
+
   if (limit !== undefined) {
     ferryTimes.splice(limit);
   }
@@ -79,7 +94,10 @@ const getFerryData = async (limit: number | undefined = undefined, useTimezone =
     ferryTimes = convertToTimezone(ferryTimes);
   }
 
-  return ferryTimes;
+  return {
+    times: ferryTimes,
+    id: stopID
+  };
 };
 
 const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
@@ -87,7 +105,7 @@ const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
   const endHour = 2;
   const startHour = 6;
 
-  let currentTime = utcToZonedTime(new Date(), timezone);
+  let currentTime = utcToZonedTime(new Date(), config.timezone);
   currentTime = roundToNearestMinutes(currentTime, {
     nearestTo: minutesBetweenStops
   });
@@ -99,7 +117,7 @@ const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
     if (currentTime.getHours() === endHour && currentTime.getMinutes() !== 0) {
       continue;
     }
-    tramTimes.push(zonedTimeToUtc(currentTime, timezone));
+    tramTimes.push(zonedTimeToUtc(currentTime, config.timezone));
   }
   if (useTimezone) {
     tramTimes = convertToTimezone(tramTimes);
@@ -118,25 +136,25 @@ const authorize = (event: APIGatewayProxyEventV2): void => {
     throw new Error('invalid token formatting');
   }
   const token = splitElem[1];
-  if (token !== APIPassword) {
+  if (token !== config.APIPassword) {
     throw new Error('unauthorized');
   }
 };
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
-    initializeConfig();
+    config.initializeConfig();
     initializeLogger();
     authorize(event);
     const limit = 5;
     const subwayData = await getSubwayData(limit);
-    const ferryData = await getFerryData(limit);
+    const { times } = await getStaticFerryData(limit);
     const tramData = getTramData(limit);
     return {
       statusCode: HTTPStatus.OK,
       body: JSON.stringify({
         subway: subwayData,
-        ferry: ferryData,
+        ferry: times,
         tram: tramData
       })
     };
@@ -152,11 +170,11 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
 };
 
 const runAction = async (): Promise<void> => {
-  initializeConfig();
+  config.initializeConfig();
   initializeLogger();
-  const dateFormat = 'yyyy-MM-dd HH:mm';
-  console.log(getTramData(5, true).map(date => format(date, dateFormat)));
-  console.log(format(utcToZonedTime(new Date(), timezone), dateFormat));
+  const dateFormat = 'yyyy-MM-dd HH:mm:ss';
+  console.log((await getStaticFerryData(5, true)).times.map(date => format(date, dateFormat)));
+  console.log(format(utcToZonedTime(new Date(), config.timezone), dateFormat));
 };
 
 if (require.main === module) {
