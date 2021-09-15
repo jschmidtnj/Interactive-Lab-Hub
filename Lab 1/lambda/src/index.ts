@@ -9,9 +9,7 @@ import { addMinutes, format, parse, roundToNearestMinutes } from 'date-fns';
 import AdmZip from 'adm-zip';
 import csv from 'csvtojson';
 
-export const convertToTimezone = (dates: Date[]): Date[] => dates.map(date => utcToZonedTime(date, config.timezone));
-
-const getSubwayData = async (limit: number | undefined = undefined, useTimezone = false): Promise<Date[]> => {
+const getSubwayData = async (limit: number | undefined = undefined): Promise<Date[]> => {
   const subwayRes = await axios.get(config.subwayRealtimeAPI, {
     headers: {
       'x-api-key': config.mtaAPIKey
@@ -23,7 +21,7 @@ const getSubwayData = async (limit: number | undefined = undefined, useTimezone 
   }
   const data = GTFSRealtimeBindings.transit_realtime.FeedMessage.decode(subwayRes.data);
 
-  let subwayTimes: Date[] = [];
+  const subwayTimes: Date[] = [];
   for (const entity of data.entity) {
     if (!entity.tripUpdate || entity.tripUpdate.trip.routeId !== 'F' || !entity.tripUpdate.stopTimeUpdate) {
       continue;
@@ -42,14 +40,11 @@ const getSubwayData = async (limit: number | undefined = undefined, useTimezone 
   if (limit !== undefined) {
     subwayTimes.splice(limit);
   }
-  if (useTimezone) {
-    subwayTimes = convertToTimezone(subwayTimes);
-  }
 
   return subwayTimes;
 };
 
-const getStaticFerryData = async (limit: number | undefined = undefined, useTimezone = false): Promise<{times: Date[], id: string}> => {
+const getStaticFerryData = async (limit: number | undefined = undefined): Promise<{times: Date[], id: string}> => {
   const ferryRes = await axios.get(config.ferryStaticAPI, {
     responseType: 'arraybuffer'
   });
@@ -81,7 +76,7 @@ const getStaticFerryData = async (limit: number | undefined = undefined, useTime
   const ferryTimesStr = givenFerryStops.map(stop => stop.arrival_time);
 
   let currentTime = new Date();
-  let ferryTimes: Date[] = [];
+  const ferryTimes: Date[] = [];
   for (const ferryTimeStr of ferryTimesStr) {
     currentTime = parse(ferryTimeStr, 'HH:mm:ss', currentTime);
     ferryTimes.push(currentTime);
@@ -90,9 +85,6 @@ const getStaticFerryData = async (limit: number | undefined = undefined, useTime
   if (limit !== undefined) {
     ferryTimes.splice(limit);
   }
-  if (useTimezone) {
-    ferryTimes = convertToTimezone(ferryTimes);
-  }
 
   return {
     times: ferryTimes,
@@ -100,7 +92,7 @@ const getStaticFerryData = async (limit: number | undefined = undefined, useTime
   };
 };
 
-const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
+const getTramData = (numTimes = 5): Date[] => {
   const minutesBetweenStops = 15;
   const endHour = 2;
   const startHour = 6;
@@ -109,7 +101,7 @@ const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
   currentTime = roundToNearestMinutes(currentTime, {
     nearestTo: minutesBetweenStops
   });
-  let tramTimes: Date[] = [];
+  const tramTimes: Date[] = [];
   for (; tramTimes.length < numTimes; currentTime = addMinutes(currentTime, minutesBetweenStops)) {
     if (currentTime.getHours() > endHour && currentTime.getHours() < startHour) {
       continue;
@@ -118,9 +110,6 @@ const getTramData = (numTimes = 5, useTimezone = false): Date[] => {
       continue;
     }
     tramTimes.push(zonedTimeToUtc(currentTime, config.timezone));
-  }
-  if (useTimezone) {
-    tramTimes = convertToTimezone(tramTimes);
   }
 
   return tramTimes;
@@ -141,6 +130,10 @@ const authorize = (event: APIGatewayProxyEventV2): void => {
   }
 };
 
+const convertToTimezone = (dates: Date[]): Date[] => dates.map(date => utcToZonedTime(date, config.timezone));
+
+const formatISO = (dates: Date[]): string[] => dates.map(date => date.toISOString().replace(/\.[0-9]{3}/, ''));
+
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   try {
     config.initializeConfig();
@@ -153,9 +146,9 @@ export const handler: APIGatewayProxyHandlerV2 = async (event) => {
     return {
       statusCode: HTTPStatus.OK,
       body: JSON.stringify({
-        subway: subwayData,
-        ferry: times,
-        tram: tramData
+        subway: formatISO(convertToTimezone(subwayData)),
+        ferry: formatISO(convertToTimezone(times)),
+        tram: formatISO(convertToTimezone(tramData))
       })
     };
   } catch (err) {
@@ -173,7 +166,7 @@ const runAction = async (): Promise<void> => {
   config.initializeConfig();
   initializeLogger();
   const dateFormat = 'yyyy-MM-dd HH:mm:ss';
-  console.log((await getStaticFerryData(5, true)).times.map(date => format(date, dateFormat)));
+  console.log(convertToTimezone((await getStaticFerryData(5)).times).map(date => format(date, dateFormat)));
   console.log(format(utcToZonedTime(new Date(), config.timezone), dateFormat));
 };
 

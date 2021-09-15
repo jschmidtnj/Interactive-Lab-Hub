@@ -2,10 +2,9 @@ import * as config from './config';
 import axios from 'axios';
 import GTFSRealtimeBindings from 'gtfs-realtime-bindings-transit';
 import HTTPStatus from 'http-status-codes';
-import { convertToTimezone } from '.';
 
 // does not have good data. might be useful in the future for something else
-export const getRealtimeFerryData = async (ferryStopID: string, limit: number | undefined = undefined, useTimezone = false): Promise<Date[]> => {
+export const getRealtimeFerryData = async (ferryStopID: string, limit: number | undefined = undefined): Promise<Date[]> => {
   const ferryRes = await axios.get(config.ferryRealtimeAPI, {
     responseType: 'arraybuffer'
   });
@@ -14,7 +13,7 @@ export const getRealtimeFerryData = async (ferryStopID: string, limit: number | 
   }
   const data = GTFSRealtimeBindings.transit_realtime.FeedMessage.decode(ferryRes.data);
 
-  let ferryTimes: Date[] = [];
+  const ferryTimes: Date[] = [];
   for (const entity of data.entity) {
     console.log(entity.tripUpdate?.stopTimeUpdate?.map(elem => elem.stopId));
     if (!entity.tripUpdate || !entity.tripUpdate.stopTimeUpdate) {
@@ -33,9 +32,6 @@ export const getRealtimeFerryData = async (ferryStopID: string, limit: number | 
   }
   if (limit !== undefined) {
     ferryTimes.splice(limit);
-  }
-  if (useTimezone) {
-    ferryTimes = convertToTimezone(ferryTimes);
   }
 
   return ferryTimes;
