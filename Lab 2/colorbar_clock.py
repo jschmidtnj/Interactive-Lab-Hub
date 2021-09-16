@@ -1,10 +1,11 @@
+#!/usr/bin/env python3
+from datetime import datetime
 import time
 import subprocess
 import digitalio
 import board
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7789 as st7789
-
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -49,13 +50,11 @@ padding = -2
 top = padding
 bottom = height - padding
 # Move left to right keeping track of the current x position for drawing shapes.
-x = 0
-
 
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the
 # same directory as the python script!
 # Some other nice fonts to try: http://www.dafont.com/bitmap.php
-font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24)
+font_location = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
 # Turn on the backlight
 backlight = digitalio.DigitalInOut(board.D22)
@@ -66,27 +65,38 @@ while True:
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
-    # Shell scripts for system monitoring from here:
-    # https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-USD-usage-and-WTTR-load
-    cmd = "hostname -I | cut -d' ' -f1"
-    IP = "IP: " + subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "curl -s wttr.in/?format=2"
-    WTTR = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = 'curl -s ils.rate.sx/1USD | cut -c1-6'
-    USD = "$1USD = ₪" + subprocess.check_output(cmd, shell=True).decode("utf-8") + "ILS"
-    cmd = "cat /sys/class/thermal/thermal_zone0/temp |  awk '{printf \"CPU Temp: %.1f C\", $(NF-0) / 1000}'" 
-    Temp = subprocess.check_output(cmd, shell=True).decode("utf-8")
-
-    # Write four lines of text.
+    max_width = width - 25
     y = top
-    draw.text((x, y), IP, font=font, fill="#FFFFFF")
-    y += font.getsize(IP)[1]
-    draw.text((x, y), WTTR, font=font, fill="#FFFF00")
-    y += font.getsize(WTTR)[1]
-    draw.text((x, y), USD, font=font, fill="#0000FF")
-    y += font.getsize(USD)[1]
-    draw.text((x, y), Temp, font=font, fill="#FF00FF")
+    now = datetime.now()
+
+    x = 0
+    hour_width = now.hour / 24 * max_width
+    draw.rectangle((x, y, hour_width, 40), outline=0, fill="#1b95f2")
+    x = hour_width + 5
+    hour_text = now.strftime("%I")
+    font = ImageFont.truetype(font_location, 40)
+    draw.text((x, y), hour_text, font=font, fill="#FFFFFF")
+    y += font.getsize(hour_text)[1]
+
+    x = 0
+    minute_width = now.minute / 60 * max_width
+    draw.rectangle((x, y, minute_width, 60), outline=0, fill="#e05b0d")
+    x = minute_width + 5
+    minute_text = str(now.minute)
+    font = ImageFont.truetype(font_location, 24)
+    draw.text((x, y), minute_text, font=font, fill="#FFFFFF")
+    y += font.getsize(minute_text)[1]
+
+    x = 0
+    second_width = now.second / 60 * max_width
+    draw.rectangle((x, y, second_width, 60), outline=0, fill="#e05b0d")
+    x = second_width + 5
+    second_text = str(now.second)
+    font = ImageFont.truetype(font_location, 24)
+    draw.text((x, y), second_text, font=font, fill="#FFFFFF")
+    y += font.getsize(second_text)[1]
 
     # Display image.
     disp.image(image, rotation)
-    time.sleep(0.1)
+    time.sleep(1)
+
