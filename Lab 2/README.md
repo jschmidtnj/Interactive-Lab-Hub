@@ -148,6 +148,8 @@ You can look in `image.py` for an example of how to display an image on the scre
 ### Set up the Display Clock Demo
 Work on `screen_clock.py`, try to show the time by filling in the while loop (at the bottom of the script where we noted "TODO" for you). You can use the code in `cli_clock.py` and `stats.py` to figure this out.
 
+See [this video](https://drive.google.com/file/d/1TO1-nc-XNyHT_QRrumRlzyk4ZzYYqc-Z/view).
+
 ### How to Edit Scripts on Pi
 One of the ways for you to edit scripts on Pi through terminal is using [`nano`](https://linuxize.com/post/how-to-use-nano-text-editor/) command. You can go into the `screen_clock.py` by typing the follow command line:
 ```
@@ -165,7 +167,7 @@ Does time have to be linear?  How do you measure a year? [In daylights? In midni
 
 Can you make time interactive? You can look in `screen_test.py` for examples for how to use the buttons.
 
-\*\*\***A copy of your code should be in your Lab 2 Github repo.**\*\*\*
+See [colorbar clock](./colorbar_clock.py).
 
 After you edit and work on the scripts for Lab 2, the files should be upload back to your own GitHub repo! You can push to your personal github repo by adding the files here, commiting and pushing.
 
@@ -181,11 +183,16 @@ After that, Git will ask you to login to your GitHub account to push the updates
 ## Part F. 
 ## Make a short video of your modified barebones PiClock
 
-\*\*\***Take a video of your PiClock.**\*\*\*
+See [this video](https://drive.google.com/file/d/1TMbOQWsin_xCLkrZvo00GIdYaKEvm2H6/view).
 
 ## Part G. 
 ## Sketch and brainstorm further interactions and features you would like for your clock for Part 2.
 
+- maybe have a clock for counting down to the different meals of the day
+- a clock for showing when your next class is
+- a clock using emojis for the hands
+- binary clock
+- wearable clock
 
 # Prep for Part 2
 
