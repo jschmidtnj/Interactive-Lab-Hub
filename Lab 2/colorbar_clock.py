@@ -65,38 +65,37 @@ while True:
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
-    max_width = width - 25
     y = top
     now = datetime.now()
 
     x = 0
-    hour_width = now.hour / 24 * max_width
+    hour_text = now.strftime("%I")
+    font = ImageFont.truetype(font_location, 42)
+    hour_width = now.hour / 24 * (width - font.getsize(hour_text)[0])
     draw.rectangle((x, y, hour_width, 40), outline=0, fill="#1b95f2")
     x = hour_width + 5
-    hour_text = now.strftime("%I")
-    font = ImageFont.truetype(font_location, 40)
     draw.text((x, y), hour_text, font=font, fill="#FFFFFF")
-    y += font.getsize(hour_text)[1]
+    y += font.getsize(hour_text)[1] + 4
 
     x = 0
-    minute_width = now.minute / 60 * max_width
-    draw.rectangle((x, y, minute_width, 60), outline=0, fill="#e05b0d")
-    x = minute_width + 5
     minute_text = str(now.minute)
-    font = ImageFont.truetype(font_location, 24)
+    font = ImageFont.truetype(font_location, 35)
+    minute_width = now.minute / 60 * (width - font.getsize(minute_text)[0])
+    draw.rectangle((x, y, minute_width, 80), outline=0, fill="#e05b0d")
+    x = minute_width + 5
     draw.text((x, y), minute_text, font=font, fill="#FFFFFF")
-    y += font.getsize(minute_text)[1]
+    y += font.getsize(minute_text)[1] + 7
 
     x = 0
-    second_width = now.second / 60 * max_width
-    draw.rectangle((x, y, second_width, 60), outline=0, fill="#e05b0d")
-    x = second_width + 5
     second_text = str(now.second)
-    font = ImageFont.truetype(font_location, 24)
+    font = ImageFont.truetype(font_location, 42)
+    second_width = now.second / 60 * (width - font.getsize(second_text)[0])
+    draw.rectangle((x, y, second_width, 132), outline=0, fill="#ff193c")
+    x = second_width + 5
     draw.text((x, y), second_text, font=font, fill="#FFFFFF")
     y += font.getsize(second_text)[1]
 
     # Display image.
     disp.image(image, rotation)
-    time.sleep(1)
+    time.sleep(0.1)
 
