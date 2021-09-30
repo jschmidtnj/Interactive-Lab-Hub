@@ -1,0 +1,7 @@
+# ignore model
+model/
+small_model/
+
+# ignore audio
+*.wav
+
