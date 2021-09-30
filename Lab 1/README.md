@@ -77,7 +77,6 @@ Sketch a storyboard of the interactions you are planning. It does not need to be
 ![storyboard](./pictures/storyboard.jpg)
 
 
-
 Present your idea to the other people in your breakout room. You can just get feedback from one another or you can work together on the other parts of the lab.
 
 Overall my group liked the idea and thought that it would be useful for them. They mentioned that light may not be the best medium to communicate this information, as you may not be looking at the map when it is the optimal time to leave to go to the public transit option. Most likely, the best implementation is having a combination of visual and auditory interaction, where users can see what the timing is for the given public transit option and hear when it is the best time to leave. They also mentioned that it might be a good idea to have a text display in addition to the LED lights, in case you forget what the colors mean, or to show the exact time the public transit option is leaving. This is a good idea if I can come up with a way to incorporate the display on the model in an intuitive way.
@@ -100,16 +99,16 @@ We invented this tool for this lab!
 
 If you run into technical issues with this tool, you can also use a light switch, dimmer, etc. that you can can manually or remotely control.
 
-I did not use Tinkerbelle for this lab, and am instead using passive interactions to communicate between the user and the device. No input is required besides a WiFi connection and REST api's.
+I did not use Tinkerbelle for this lab, and am instead using passive interactions to communicate between the user and the device. No input is required besides a WiFi connection and REST API's.
 
 ## Part D. Wizard the device
 Take a little time to set up the wizarding set-up that allows for someone to remotely control the device while someone acts with it. Hint: You can use Zoom to record videos, and you can pin someone’s video feed if that is the scene which you want to record. 
 
-\*\***Include your first attempts at recording the set-up video here.**\*\*
+![the island](./pictures/island.png)
 
-Now, change the goal within the same setting, and update the interaction with the paper prototype. 
+I created a 3d model of Roosevelt island, and separate models of a subway car, tram and ferry. The island is shown above. I used the model to approximate interacting with the device.
 
-\*\***Show the follow-up work here.**\*\*
+Now, change the goal within the same setting, and update the interaction with the paper prototype.
 
 
 ## Part E. Costume the device
@@ -129,8 +128,6 @@ The main concern is that the device needs to be bright enough in order for the u
 
 ## Part F. Record
 
-\*\***Take a video of your prototyped interaction.**\*\*
-
 Be generous in acknowledging their contributions! And also recognizing any other influences (e.g. from YouTube, Github, Twitter) that informed your design. 
 
 I had many influences when completing this lab, including Hayden Daly and Rohan Divate, my roommates, as well as the Maker Lab, which helped me with prototyping and design. The MQTT documentation helped greatly with prototyping and designing the model.
@@ -144,7 +141,7 @@ This describes the second week's work for this lab activity.
 
 You will be assigned three partners from another group. Go to their github pages, view their videos, and provide them with reactions, suggestions & feedback: explain to them what you saw happening in their video. Guess the scene and the goals of the character. Ask them about anything that wasn’t clear. 
 
-\*\***Summarize feedback from your partners here.**\*\*
+Overall the feedback was fairly positive. Some of the people who looked at my project thought that there may need to be an auditory component, or the light should be bright enough to grab the user's attention from different angles. I will need to address these concerns when prototyping a final design. Some of the 3d models can be found in the [model folder](./models/), and the code in the [RoseTransit folder](./RoseTransit/).
 
 ## Make it your own
 
@@ -153,4 +150,15 @@ Do last week’s assignment again, but this time:
 2) You can use any modality (e.g., vibration, sound) to prototype the behaviors! Again, be creative!
 3) We will be grading with an emphasis on creativity. 
 
-\*\***Document everything here. (Particularly, we would like to see the storyboard and video, although photos of the prototype are also great.)**\*\*
+For this week, I joined a different group and worked on a different project. We came up with the idea of a device that counts how many people enter a room, and if it reaches maximum occupancy, it would alert the users that someone needs to exit the room. This is done through an auditory alert.
+
+- **Setting**: The device is placed in conference rooms, or smaller confined rooms with multiple people present. It is focused on responding to covid-19 social distancing concerns.
+- **Players**: The people involved include anyone who may enter a room containing the device.
+- **Activity**: The activity is entering or leaving the room, and hearing the alert if it goes off.
+- **Goals**: The goal is to alert users in an obtrusive way if they are reaching or exceeding the capacity of the given room.
+
+![storyboard](./pictures/storyboard_2.jpg)
+
+After making the storyboard with our group, we acted out the scenario, interacting with the device. You can find the video [here](https://drive.google.com/file/d/1UaXR9OTgEsIdSA7Z4tQTH4kEyaQaovv2/view?usp=sharing).
+
+After going through this exercise, I have a better understanding of how to effectively generate and test ideas without fully prototyping all of the features. It is better to constantly iterate and try new things rather than getting stuck on implementation details, especially initially.
