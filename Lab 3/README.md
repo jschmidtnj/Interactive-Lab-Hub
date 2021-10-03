@@ -98,13 +98,13 @@ From a remote browser on the same network, check to make sure your webserver is 
 
 ### Storyboard
 
-Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.) 
+Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.)
 
-\*\***Post your storyboard and diagram here.**\*\*
+![storyboard](./images/storyboard.jpg)
 
-Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses. 
+Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses.
 
-\*\***Please describe and document your process.**\*\*
+For the storyboard we sketched out the interactions with Jesa, a personal assistant. Jesa helps Steve in the morning with waking up on time, greeting him, and helping Steve pick out his outfit. Most of the dialogue is auditory, but waving to Steve and showing Steve different outfit choices is visual.
 
 ### Acting out the dialogue
 

@@ -227,4 +227,10 @@ As always, make sure you document contributions and ideas from others explicitly
 
 You are permitted (but not required) to work in groups and share a turn in; you are expected to make equal contribution on any group work you do, and N people's group project should look like N times the work of a single person's lab. What each person did should be explicitly documented. Make sure the page for the group turn in is linked to your Interactive Lab Hub page. 
 
+The people in my group liked most of my clock ideas, apart form the emoji clock. I ended up building the binary clock because it seemed the most feasible within the timeframe. The source code can be found in [binary_clock.py](./binary_clock.py), and it is a modification of screen_clock.py. A video of the clock is shown below:
 
+<figure class="video_container">
+  <video controls="true" allowfullscreen="true">
+    <source src="./images/binary_clock.mp4" type="video/mp4">
+  </video>
+</figure>
