@@ -229,8 +229,4 @@ You are permitted (but not required) to work in groups and share a turn in; you 
 
 The people in my group liked most of my clock ideas, apart form the emoji clock. I ended up building the binary clock because it seemed the most feasible within the timeframe. The source code can be found in [binary_clock.py](./binary_clock.py), and it is a modification of screen_clock.py. A video of the clock is shown below:
 
-<figure class="video_container">
-  <video controls="true" allowfullscreen="true">
-    <source src="./images/binary_clock.mp4" type="video/mp4">
-  </video>
-</figure>
+[![Binary clock](https://img.youtube.com/vi/LscJSNfuSV8/0.jpg)](https://www.youtube.com/watch?v=LscJSNfuSV8)
