@@ -124,8 +124,16 @@ For Part 2, you will redesign the interaction with the speech-enabled device usi
 ## Prep for Part 2
 
 1. What are concrete things that could use improvement in the design of your device? For example: wording, timing, anticipation of misunderstandings...
+
+The first thing that definitely needs improvement is the speech for interacting with the device. The wording was not very intuitive when working with the prototype, and it needs some form of natural language understanding. Additionally, the wave goodbye feature needs to be refined based on the final design of the device. The device needs to be big enough for the user to be able to see the hand waving.
+
 2. What are other modes of interaction _beyond speech_ that you might also use to clarify how to interact?
+
+We might also use an LED display of some sort in order to show the current status of Jesa, such as if it's processing a user input, waving to the user, or doing any other form of work. We also probably need a camera to analyze the user's outfit and come up with suggestions, and network connection to interact with other devices, such as a smart mirror.
+
 3. Make a new storyboard, diagram and/or script based on these reflections.
+
+![storyboard 2](./images/storyboard_2.jpg)
 
 ## Prototype your system
 
@@ -134,7 +142,7 @@ The system should:
 * use one or more sensors
 * require participants to speak to it. 
 
-*Document how the system works*
+*Document how the system works*GameObject visualizer = Instantiate(m_DistanceVisualizer);
 
 *Include videos or screencaptures of both the system and the controller.*
 
