@@ -98,7 +98,23 @@ pi@ixe00:~$ cd ~/openCV-examples/object-detection
 pi@ixe00:~/openCV-examples/object-detection $ python detect.py
 ```
 
+![contours](./images/contours.png)
+
+You can use the contours detection tool for surveying different terrains, mapping surfaces in moving vehicles. It runs pretty quickly and has decent accuracy, which may make it useful for low-cost mapping devices for self-driving car technology.
+
+![face detect](./images/face.png)
+
+Detecting faces can be used to estimate crowd size in high-trafficked areas. This can then be used to determine peak hours of the day, and predict times to attend venues when it is less busy.
+
+![optical flow](./images/optical_flow.png)
+
+![detect](./images/detect.png)
+
+The detect script can be used to detect different objects, which is useful in autonomous robotics for detecting and avoiding obstacles. Through classifying obstacles, you can get a predicted size and use that information to determine the best route.
+
 **\*\*\*Try each of the following four examples in the `openCV-examples`, include screenshots of your use and write about one design for each example that might work based on the individual benefits to each algorithm.\*\*\***
+
+
 
 #### MediaPipe
 

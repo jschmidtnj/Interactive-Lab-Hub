@@ -168,12 +168,18 @@ Connect it to your pi with Qwiic connector and try running the example script to
 
 You can go to the [SparkFun GitHub Page](https://github.com/sparkfun/Qwiic_VL53L1X_Py) to learn more about the sensor and see other examples!
 
+**got all the sensors working** - daisy chained the sensors together, verified they worked as expected.
+
+![daisy chain](./images/daisy_chain.png)
+
 ### Part C
 ### Physical considerations for sensing
 
 Usually, sensors need to positioned in specific locations or orientations to make them useful for their application. Now that you've tried a bunch of the sensors, pick one that you would like to use, and an application where you use the output of that sensor for an interaction. For example, you can use a distance sensor to measure someone's height if you position it overhead and get them to stand under it.
 
 **\*\*\*Draw 5 sketches of different ways you might use your sensor, and how the larger device needs to be shaped in order to make the sensor useful.\*\*\***
+
+TODO - 
 
 **\*\*\*What are some things these sketches raise as questions? What do you need to physically prototype to understand how to anwer those questions?\*\*\***
 
@@ -218,13 +224,15 @@ Here is an example:
 
 Think about how you want to present the information about what your sensor is sensing! Design a paper display for your project that communicates the state of the Pi and a sensor. Ideally you should design it so that you can slide the Pi out to work on the circuit or programming, and then slide it back in and reattach a few wires to be back in operation.
  
-**\*\*\*Sketch 5 designs for how you would physically position your display and any buttons or knobs needed to interact with it.\*\*\***
+![ideas 1](./images/first_ideas.jpg)
 
-**\*\*\*What are some things these sketches raise as questions? What do you need to physically prototype to understand how to anwer those questions?\*\*\***
+![ideas 2](./images/second_ideas.jpg)
 
-**\*\*\*Pick one of these display designs to integrate into your prototype.\*\*\***
+I decided to go with the 2fa unlocking device for my design. The reason behind this is I wanted to create something that's useful, unique and feasible. The auto light switch or the flappy pi seem interesting but not that practical or useful. The gait / position tracker would be difficult to implement, because it requires computer vision and onboard ml.
 
-**\*\*\*Explain the rationale for the design.\*\*\*** (e.g. Does it need to be a certain size or form or need to be able to be seen from a certain distance?)
+The 2fa device needs to be small enough to fit into your pocket / on your keychain, so that you can bring it with you to class or to work. It needs to contain different interactive inputs, such as a switch, a joystick, and buttons, in order to provide different authentication methods. Another requirement is it needs to be able to boot up quickly, or potentially have its own power source, so that it can connect to your computer quickly and have inputs. The screen should have text large enough to be seen from around 10 inches away. It shouldn't be visible from that far away because otherwise nefarious individuals might deduce it's a 2fa device and try to take it.
+
+TODO - show a diagram of the device.
 
 Build a cardbord prototype of your design.
 
@@ -273,4 +281,5 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Looks like": shows how the device should look, feel, sit, weigh, etc.
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
+
 
