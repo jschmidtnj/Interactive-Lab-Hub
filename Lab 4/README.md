@@ -177,13 +177,19 @@ You can go to the [SparkFun GitHub Page](https://github.com/sparkfun/Qwiic_VL53L
 
 Usually, sensors need to positioned in specific locations or orientations to make them useful for their application. Now that you've tried a bunch of the sensors, pick one that you would like to use, and an application where you use the output of that sensor for an interaction. For example, you can use a distance sensor to measure someone's height if you position it overhead and get them to stand under it.
 
-**\*\*\*Draw 5 sketches of different ways you might use your sensor, and how the larger device needs to be shaped in order to make the sensor useful.\*\*\***
-
-TODO - 
-
-**\*\*\*What are some things these sketches raise as questions? What do you need to physically prototype to understand how to anwer those questions?\*\*\***
-
 **\*\*\*Pick one of these designs to prototype.\*\*\***
+
+![ideas 1](./images/first_ideas.jpg)
+
+![ideas 2](./images/second_ideas.jpg)
+
+I decided to go with the 2fa unlocking device for my design. The reason behind this is I wanted to create something that's useful, unique and feasible. The auto light switch or the flappy pi seem interesting but not that practical or useful. The gait / position tracker would be difficult to implement, because it requires computer vision and onboard ml.
+
+The 2fa device needs to be small enough to fit into your pocket / on your keychain, so that you can bring it with you to class or to work. It needs to contain different interactive inputs, such as a switch, a joystick, and buttons, in order to provide different authentication methods. Another requirement is it needs to be able to boot up quickly, or potentially have its own power source, so that it can connect to your computer quickly and have inputs. The screen should have text large enough to be seen from around 10 inches away. It shouldn't be visible from that far away because otherwise nefarious individuals might deduce it's a 2fa device and try to take it.
+
+Final design to prototype:
+
+![final design](./images/final_idea_diagram.jpg)
 
 
 ### Part D
@@ -223,21 +229,14 @@ Here is an example:
 <img src="https://github.com/FAR-Lab/Developing-and-Designing-Interactive-Devices/blob/2020Fall/images/horoscope.png?raw=true"  width="250"/>
 
 Think about how you want to present the information about what your sensor is sensing! Design a paper display for your project that communicates the state of the Pi and a sensor. Ideally you should design it so that you can slide the Pi out to work on the circuit or programming, and then slide it back in and reattach a few wires to be back in operation.
- 
-![ideas 1](./images/first_ideas.jpg)
 
-![ideas 2](./images/second_ideas.jpg)
+Build a cardboard prototype of your design.
 
-I decided to go with the 2fa unlocking device for my design. The reason behind this is I wanted to create something that's useful, unique and feasible. The auto light switch or the flappy pi seem interesting but not that practical or useful. The gait / position tracker would be difficult to implement, because it requires computer vision and onboard ml.
+![paper prototype](./images/prototype_front.jpg)
 
-The 2fa device needs to be small enough to fit into your pocket / on your keychain, so that you can bring it with you to class or to work. It needs to contain different interactive inputs, such as a switch, a joystick, and buttons, in order to provide different authentication methods. Another requirement is it needs to be able to boot up quickly, or potentially have its own power source, so that it can connect to your computer quickly and have inputs. The screen should have text large enough to be seen from around 10 inches away. It shouldn't be visible from that far away because otherwise nefarious individuals might deduce it's a 2fa device and try to take it.
+I built a prototype out of cardboard for the 2 factor authentication device. This prototype has the OLED screen, the keychain, a button, a dial, and a joystick for password input.
 
-TODO - show a diagram of the device.
-
-Build a cardbord prototype of your design.
-
-**\*\*\*Document your rough prototype.\*\*\***
-
+![protytpe keychain](./images/keychain.jpg)
 
 LAB PART 2
 
@@ -282,4 +281,8 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
 
+TODO - add video here
 
+I learned from my classmates that they overall liked the 2fa idea, but I should spend some time making the device smaller and less complex. One thing that would help is to integrate a battery into the device, instead of needing to plug it into the wall or use an external battery bank. Another thought they had was to use a microcontroller (an ESP32) or a similar low-powered, smaller device, in order to provide the same functionality. Given more time and resources, this is the approach that I would go down.
+
+We also discussed the main benefits of using the Pi 2FA over your phone for unlocking. One benefit is if you lose your phone / if it is stolen, you are still able to get into your accounts. Another is security by obscurity. Bad actors will have a harder time breaking into such a unique 2FA device, especially if each device has a unique set of input components that work together to create an intricate password.
