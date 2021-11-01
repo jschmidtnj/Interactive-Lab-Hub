@@ -108,12 +108,11 @@ Detecting faces can be used to estimate crowd size in high-trafficked areas. Thi
 
 ![optical flow](./images/optical_flow.png)
 
+The optical flow script can be used to visualize movement in an image, when looking at the flow of people through an area. One implementation of this could be in understanding crowd movements in a mall, seeing which stores are highly trafficked, and correlating that information with advertisements displayed.
+
 ![detect](./images/detect.png)
 
 The detect script can be used to detect different objects, which is useful in autonomous robotics for detecting and avoiding obstacles. Through classifying obstacles, you can get a predicted size and use that information to determine the best route.
-
-**\*\*\*Try each of the following four examples in the `openCV-examples`, include screenshots of your use and write about one design for each example that might work based on the individual benefits to each algorithm.\*\*\***
-
 
 
 #### MediaPipe
