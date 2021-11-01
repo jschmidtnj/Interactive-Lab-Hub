@@ -281,7 +281,7 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 * "Works like": shows what the device can do
 * "Acts like": shows how a person would interact with the device
 
-See video here: ![google drive](https://drive.google.com/file/d/13wVIeNRv0ABRx1G5hl-XURUwYd5spFbo/view?usp=sharing) (![youtube](https://youtu.be/_tcQLPRxfzM))
+See video here: [google drive](https://drive.google.com/file/d/13wVIeNRv0ABRx1G5hl-XURUwYd5spFbo/view?usp=sharing) ([youtube](https://youtu.be/_tcQLPRxfzM))
 
 I learned from my classmates that they overall liked the 2fa idea, but I should spend some time making the device smaller and less complex. One thing that would help is to integrate a battery into the device, instead of needing to plug it into the wall or use an external battery bank. Another thought they had was to use a microcontroller (an ESP32) or a similar low-powered, smaller device, in order to provide the same functionality. Given more time and resources, this is the approach that I would go down.
 
