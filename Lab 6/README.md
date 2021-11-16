@@ -180,4 +180,4 @@ If someone encountered the box in the wild, they would not know what to do with 
 
 **\*\*\*4. Document the working prototype in use.\*\*\*** It may be helpful to record a Zoom session where you should the input in one location clearly causing response in another location.
 
-Here's a video of it working: [https://youtu.be/vreeq37x98Q](https://youtu.be/vreeq37x98Q).
+Here's a video of it working: [https://youtu.be/CSb9MUOUckc](https://youtu.be/CSb9MUOUckc).

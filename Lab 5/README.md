@@ -260,4 +260,8 @@ A good environment for the attention classifier would be the inside of a car, wi
 
 Following exploration and reflection from Part 1, finish building your interactive system, and demonstrate it in use with a video.
 
-video: ![https://youtube.com/watch?v=dQw4w9WgXcQ](https://youtube.com/watch?v=dQw4w9WgXcQ)
+Here is my model: https://teachablemachine.withgoogle.com/models/4WqyWM6Zx
+
+And here is a video of it working: [https://youtu.be/9k5iA4Oh4ig](https://youtu.be/9k5iA4Oh4ig)
+
+It would be used to make sure the driver pays attention in semi-autonomous cars. When the driver is classified in Class 2, the car will beep and instruct the user to put their hands on the wheel and look ahead at the road.
