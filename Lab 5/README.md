@@ -219,18 +219,27 @@ The interaction I chose is to create a classifier for people paying attention to
 ### Part C
 ### Test the interaction prototype
 
+
+
 Now flight test your interactive prototype and **note down your observations**:
 For example:
 1. When does it do what it is supposed to do?
-1. When does it fail?
-1. When it fails, why does it fail?
-1. Based on the behavior you have seen, what other scenarios could cause problems?
+The classifier does a good job of showing when the user is looking directly at the camera or off in the distance.
+2. When does it fail?
+It fails when the user's gaze is somewhat at the camera but not directly in the same direction.
+3. When it fails, why does it fail?
+It likely fails because I only used 50 training images. With more images the model would likely produce better results.
+4. Based on the behavior you have seen, what other scenarios could cause problems?
+THe model will probably also fail with people of different backgrounds and faces, because it is not trained on that type of data.
 
-**\*\*\*Think about someone using the system. Describe how you think this will work.\*\*\***
 1. Are they aware of the uncertainties in the system?
-1. How bad would they be impacted by a miss classification?
-1. How could change your interactive system to address this?
-1. Are there optimizations you can try to do on your sense-making algorithm.
+A user would likely interact passively with the system, only noticing it when it alerts them of needing to pay attention. They would not be aware of any uncertainties, as the audio cue would trigger regardless of uncertainty.
+2. How bad would they be impacted by a miss classification?
+A false positive would not be a big deal, because the user would just get an extra alert to pay attention. However, a false negative could be catastrophic and result in a car crash. So it is important to be extra cautious when designing this system.
+3. How could change your interactive system to address this?
+I would add a lot more training data and bias the model to be more cautious.
+4. Are there optimizations you can try to do on your sense-making algorithm.
+I could try using lower-resolution images and potentially run the images through a CNN to reduce dimensionality first.
 
 ### Part D
 ### Characterize your own Observant system
@@ -245,10 +254,10 @@ During the lecture, we mentioned questions to help characterize a material:
 * What are other properties/behaviors of X?
 * How does X feel?
 
-**\*\*\*Include a short video demonstrating the answers to these questions.\*\*\***
+A good environment for the attention classifier would be the inside of a car, with a camera facing the driver. The classifier may break in not ideal lighting conditions, with drivers of different heights, or of different skin tones. The classifier should feel unobtrusive, only being activated when the user is not paying attention.
 
 ### Part 2.
 
 Following exploration and reflection from Part 1, finish building your interactive system, and demonstrate it in use with a video.
 
-**\*\*\*Include a short video demonstrating the finished result.\*\*\***
+video: ![https://youtube.com/watch?v=dQw4w9WgXcQ](https://youtube.com/watch?v=dQw4w9WgXcQ)
