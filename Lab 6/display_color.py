@@ -55,7 +55,7 @@ sensor = adafruit_apds9960.apds9960.APDS9960(i2c)
 sensor.enable_color = True
 r, g, b, a = sensor.color_data
 
-topic = 'IDD/colors'
+topic = 'IDD/color'
 
 def on_connect(client, userdata, flags, rc):
     print(f"connected with result code {rc}")
@@ -65,7 +65,8 @@ def on_message(client, userdata, msg):
     # if a message is received on the colors topic, parse it and set the color
     if msg.topic == topic:
         colors = list(map(int, msg.payload.decode('UTF-8').split(',')))
-        draw.rectangle((0, 0, width, height*0.5), fill=colors[0])
+        print(colors)
+        draw.rectangle((0, 0, width, height*0.5), fill=colors)
         disp.image(image)
 
 client = mqtt.Client(str(uuid.uuid1()))
@@ -89,6 +90,4 @@ def handler(signum, frame):
 # hen sigint happens, do the handler callback function
 signal.signal(signal.SIGINT, handler)
 
-# our main loop
-while True:
-    time.sleep(.01)
+client.loop_forever()

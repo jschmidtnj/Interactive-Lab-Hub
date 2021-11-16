@@ -156,7 +156,13 @@ Find at least one class (more are okay) partner, and design a distributed applic
 
 **\*\*\*1. Explain your design\*\*\*** For example, if you made a remote controlled banana piano, explain why anyone would want such a thing.
 
+JoshBox™ is a game that helps parents keep their kids entertained while they're at work. Josh used to play it when he was little, albeit without the IoT tech we have today. How it works is the parents create a set of clues for their children to follow as they try to find the box, very similar to a scavenger hunt. When the kids get stuck, they get three clues from their parents during their lunch break. What's inside the box varies, but it's usually candy. When they find the box, the kids ask their parents for the combination (it varies per game) and if they're good they'll get it.
+
+In JoshBox™ tech version, this combination is automatically provided, and parents just need to click a button in order to reveal the prize. It automates the setup process, making it easy for parents.
+
 **\*\*\*2. Diagram the architecture of the system.\*\*\*** Be clear to document where input, output and computation occur, and label all parts and connections. For example, where is the banana, who is the banana player, where does the sound get played, and who is listening to the banana music?
+
+
 
 **\*\*\*3. Build a working prototype of the system.\*\*\*** Do think about the user interface: if someone encountered these bananas somewhere in the wild, would they know how to interact with them? Should they know what to expect?
 
