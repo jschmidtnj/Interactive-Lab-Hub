@@ -116,6 +116,8 @@ Plug in the capacitive sensor board with the Qwiic connector. Use the alligator 
 
 When running the script I saw the example topic. Then I changed the topic in the code to `joshua/twizzlers` and saw the messages sending. They were just text messages saying a twizzler was pressed.
 
+![joystick](./work_images/joystick.png)
+
 I decided to send joystick data over MQTT. When the joystick moves up, down, left or right I log that input to the `IDD/joystick_test` topic. You can find the source code in [./joystick.py](./joystick.py).
 
 ### Part D
@@ -162,8 +164,14 @@ In JoshBox™ tech version, this combination is automatically provided, and pare
 
 **\*\*\*2. Diagram the architecture of the system.\*\*\*** Be clear to document where input, output and computation occur, and label all parts and connections. For example, where is the banana, who is the banana player, where does the sound get played, and who is listening to the banana music?
 
-
+![diagram](./work_images/diagram_box.jpg)
 
 **\*\*\*3. Build a working prototype of the system.\*\*\*** Do think about the user interface: if someone encountered these bananas somewhere in the wild, would they know how to interact with them? Should they know what to expect?
 
+See source code at [box_opener.py](./box_opener.py) or at [./project.py](./project.py).
+
+If someone encountered the box in the wild, they would not know what to do with it. It would just be closed and locked. The parents would need to tell them the rules and how to open it.
+
 **\*\*\*4. Document the working prototype in use.\*\*\*** It may be helpful to record a Zoom session where you should the input in one location clearly causing response in another location.
+
+Here's a video of it working: [video](https://www.youtube.com/watch?v=X_Q-X_Q-X_Q).
