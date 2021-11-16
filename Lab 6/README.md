@@ -84,7 +84,14 @@ Once connected, you should be able to see all the messages under the IDD topic. 
   ...
   ```
 
-**\*\*\*Consider how you might use this messaging system on interactive devices, and draw/write down 5 ideas here.\*\*\***
+MQTT is a really powerful tool for distributed systems. It can be used in many different ways for IoT devices, in order to stream data to a central server for further processing. This can even be done in real time. IoT / edge computing devices are inherently low-powered, so it is very useful to be able to offload this work to a more powerful server. Here are some ideas of potential applications:
+
+- rain water monitoring
+- soil nutrient sensor reporting
+- crowd size monitoring and detection
+- temperature and humidity monitoring in different sections of a building
+- factory line speed monitoring
+- building-sized Pong using high-powered LED lights
 
 ### Part C
 ### Streaming a Sensor
@@ -105,10 +112,11 @@ Plug in the capacitive sensor board with the Qwiic connector. Use the alligator 
  ...
  ```
 
-**\*\*\*Include a picture of your setup here: what did you see on MQTT Explorer?\*\*\***
+![mqtt explorer](./work_images/mqtt_topic_explore.png)
 
-**\*\*\*Pick another part in your kit and try to implement the data streaming with it.\*\*\***
+When running the script I saw the example topic. Then I changed the topic in the code to `joshua/twizzlers` and saw the messages sending. They were just text messages saying a twizzler was pressed.
 
+I decided to send joystick data over MQTT. When the joystick moves up, down, left or right I log that input to the `IDD/joystick_test` topic. You can find the source code in [./joystick.py](./joystick.py).
 
 ### Part D
 ### The One True ColorNet
@@ -124,7 +132,7 @@ The first step on the path to *collective* enlightenment, plug the [APDS-9960 Pr
 </p>
 
 
-The second step to achieving our great enlightenment is to run `color.py`. We have talked about this sensor back in Lab 2 and Lab 4, this script is similar to what you have done before! Remember to ativate the `circuitpython` virtual environment you have been using during this semester before running the script:
+The second step to achieving our great enlightenment is to run `color.py`. We have talked about this sensor back in Lab 2 and Lab 4, this script is similar to what you have done before! Remember to activate the `circuitpython` virtual environment you have been using during this semester before running the script:
 
  ```
  (circuitpython) pi@ixe00:~ Interactive-Lab-Hub/Lab 6 $ python color.py
@@ -137,10 +145,9 @@ By running the script, wou will find the two squares on the display. Half is sho
 
 You may ask "but what if I missed class?" Am I not admitted into the collective enlightenment of the *OneColor*?
 
-Of course not! You can go to [https://one-true-colornet.glitch.me/](https://one-true-colornet.glitch.me/) and become one with the ColorNet on the inter-webs. Glitch is a great tool for prototyping sites, interfaces and web-apps that's worth taking some time to get familiar with if you have a chance. Its not super pertinent for the class but good to know either way. 
+Of course not! You can go to [https://one-true-colornet.glitch.me/](https://one-true-colornet.glitch.me/) and become one with the ColorNet on the inter-webs. Glitch is a great tool for prototyping sites, interfaces and web-apps that's worth taking some time to get familiar with if you have a chance. Its not super pertinent for the class but good to know either way.
 
-**\*\*\*Can you set up the script that can read the color anyone else publish and display it on your screen?\*\*\***
-
+This is a script for displaying the color that anyone publishes to the `IDD/colors` topic: [display color](./display_color.py)
 
 ### Part E
 ### Make it your own
@@ -154,6 +161,3 @@ Find at least one class (more are okay) partner, and design a distributed applic
 **\*\*\*3. Build a working prototype of the system.\*\*\*** Do think about the user interface: if someone encountered these bananas somewhere in the wild, would they know how to interact with them? Should they know what to expect?
 
 **\*\*\*4. Document the working prototype in use.\*\*\*** It may be helpful to record a Zoom session where you should the input in one location clearly causing response in another location.
-
-<!--**\*\*\*5. BONUS (Wendy didn't approve this so you should probably ignore it)\*\*\*** get the whole class to run your code and make your distributed system BIGGER.-->
-
