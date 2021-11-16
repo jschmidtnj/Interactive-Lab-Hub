@@ -147,14 +147,11 @@ Each of the installs will take a while, please be patient. After successfully in
 (mpipe) pi@ixe00:~ Interactive-Lab-Hub/Lab 5 $ python hand_pose.py
 ```
 
-Try the two main features of this script: 1) pinching for percentage control, and 2) "[Quiet Coyote](https://www.youtube.com/watch?v=qsKlNVpY7zg)" for instant percentage setting. Notice how this example uses hardcoded positions and relates those positions with a desired set of events, in `hand_pose.py` lines 48-53. 
+Try the two main features of this script: 1) pinching for percentage control, and 2) "[Quiet Coyote](https://www.youtube.com/watch?v=qsKlNVpY7zg)" for instant percentage setting. Notice how this example uses hardcoded positions and relates those positions with a desired set of events, in `hand_pose.py` lines 48-53.
 
-**\*\*\*Consider how you might use this position based approach to create an interaction, and write how you might use it on either face, hand or body pose tracking.\*\*\***
-
-I could use the percentage control to select the temperature in a room for a ubiquitous AR application, connecting with IoT devices. It could also be used to control the volume of a speaker system.
+I could use the percentage control to select the temperature in a room for a ubiquitous AR application, connecting with IoT devices. It could also be used to control the volume of a speaker system. I could also face tracking to check if people are paying attention in cars that are slightly autonomous, in order to prevent accidents.
 
 (You might also consider how this notion of percentage control with hand tracking might be used in some of the physical UI you may have experimented with in the last lab, for instance in controlling a servo or rotary encoder.)
-
 
 
 #### Teachable Machines
@@ -189,11 +186,14 @@ This might take a while to get fully installed. After installation, connect your
 
 **\*\*\*Whether you make your own model or not, include screenshots of your use of Teachable Machines, and write how you might use this to create your own classifier. Include what different affordances this method brings, compared to the OpenCV or MediaPipe options.\*\*\***
 
+![mask classifier](./images/mask_classifier.png)
+
+Above is a screenshot of the running teachable machines mask classifier. I could use teachable machines to create a classifier for many different types of images. Object character recognition for reading text, classifying obstacles for a robot, or detecting faces for biometric login are all good uses. Compared to OpenCV, teachable machines can be easier to get set up and more flexible with the type of images it can classify. It can also produce better results with less data.
 
 *Don't forget to run ```deactivate``` to end the Teachable Machines demo, and to reactivate with ```source tmachine/bin/activate``` when you want to use it again.*
 
 
-#### Filtering, FFTs, and Time Series data. (optional)
+#### Filtering, FFTs, and Time Series data. (optional) <- optional...
 Additional filtering and analysis can be done on the sensors that were provided in the kit. For example, running a Fast Fourier Transform over the IMU data stream could create a simple activity classifier between walking, running, and standing.
 
 Using the accelerometer, try the following:
@@ -214,14 +214,14 @@ Pick one of the models you have tried, pick a class of objects, and experiment w
 This can be as simple as the boat detector earlier.
 Try out different interaction outputs and inputs.
 
-**\*\*\*Describe and detail the interaction, as well as your experimentation here.\*\*\***
+The interaction I chose is to create a classifier for people paying attention to the road while driving. With semi-autonomous driving features from the legacy car makers and newcomers like Tesla, it is important to make sure that people are staying vigilant and alert. I will experiment with uploading images of people either looking at the road or away towards the driver's side or into space. I will manually label these pictures and see how accurate it is with new pictures.
 
 ### Part C
 ### Test the interaction prototype
 
 Now flight test your interactive prototype and **note down your observations**:
 For example:
-1. When does it what it is supposed to do?
+1. When does it do what it is supposed to do?
 1. When does it fail?
 1. When it fails, why does it fail?
 1. Based on the behavior you have seen, what other scenarios could cause problems?
