@@ -112,11 +112,17 @@ Plug in the capacitive sensor board with the Qwiic connector. Use the alligator 
  ...
  ```
 
+ ### sensor pictures
+
+ ![touch sensor](./work_images/touch_without_hands.jpg)
+ 
+ ![touch sensor 2](./work_images/touch_with_hands.jpg)
+
 ![mqtt explorer](./work_images/mqtt_topic_explore.png)
 
 When running the script I saw the example topic. Then I changed the topic in the code to `joshua/twizzlers` and saw the messages sending. They were just text messages saying a twizzler was pressed.
 
-![joystick](./work_images/joystick.png)
+![joystick](./work_images/joystick.jpg)
 
 I decided to send joystick data over MQTT. When the joystick moves up, down, left or right I log that input to the `IDD/joystick_test` topic. You can find the source code in [./joystick.py](./joystick.py).
 
