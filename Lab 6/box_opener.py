@@ -2,6 +2,7 @@
 from datetime import datetime
 import time
 import digitalio
+import uuid
 import board
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7789 as st7789
@@ -15,7 +16,7 @@ client.connect(
     'farlab.infosci.cornell.edu',
     port=8883)
 
-topic = 'IDD/josh_box'
+topic = 'IDD/joshbox'
 
 
 
@@ -78,10 +79,11 @@ buttonA.switch_to_input()
 buttonB.switch_to_input()
 
 def send_open_command():
+    print('open it!!')
     client.publish(topic, "open box!")
 
 while True:
-    if buttonA.value or buttonB.value:
+    if not buttonA.value or not buttonB.value:
         send_open_command()
 
     # Draw a black filled box to clear the image.
