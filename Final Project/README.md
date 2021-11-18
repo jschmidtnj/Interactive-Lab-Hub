@@ -1,46 +1,29 @@
-# Final Project
+# Project Plan
 
-Using the tools and techniques you learned in this class, design, prototype and test an interactive device.
+> Escher Campanella & Joshua Schmidt
 
-Project plan - November 22
+## Big idea
 
-Peer feedback on Project plans: November 24
+We're going to be making the ultimate umbrella - the Lightbrella. It's a clear umbrella that has LED string lights attached to it which relay information to the user, and make the umbrella look interesting and pretty in the rain. The main feature of the umbrella is to warn users of when it's about to rain, and to make users visible to traffic in the rain. Some other features include showing what direction the user is moving in and changing colors when the umbrella spins.
 
-Functional check-off - November 30 & December 2
+## timeline
 
-Final Project Presentations - December 7
+- by 11/29: source parts for the device
+- by 12/3: create initial hardware prototype and proof-of-concept software
+- by 12/6: integrate light prototype into an umbrella. create waterproofing system
+- by 12/8: test the final prototype either in the shower or in the rain (if it rains)
 
-Write-up and documentation due - December 13
+## parts needed
 
-## Objective
+- raspberry pi zero (optional)
+- waterproofing material (already have)
+- waterproof electronics box (optional)
+- LED string lights (already have)
+- clear umbrella (already have)
+- cellular board (optional)
 
-The goal of this final project is for you to have a fully functioning and well-designed interactive device of your own design.
- 
-## Description
-Your project is to design and build an interactive device to suit a specific application of your choosing, and test the interaction with people. 
-## Deliverables
+## fall-back plan
 
-1. Project plan: Big idea, timeline, parts needed, fall-back plan.
-
-2. Functioning project: The finished project should be a device, system, interface, etc. that people can interact with.
-
-3. Documentation of design process
-4. Archive of all code, design patterns, etc. used in the final design. (As with labs, the standard should be that the documentation would allow you to recreate your project if you woke up with amnesia.)
-5. Video of someone using your project
-6. Reflections on process (What have you learned or wish you knew at the start?)
-
-7. Group work distribution questionnaire
-
-## Change of Design
-
-It is fine to change your project goals, but please resubmit the project plan for the new design when you do that.
-
-
-## Teams
-
-You can and are not required to work in teams. Be clear in documentation who contributed what. The total project contributions should reflect the number of people on the project.
-
-## Examples
-
-[Here is a list of good final projects from previous classes.](https://github.com/FAR-Lab/Developing-and-Designing-Interactive-Devices/wiki/Previous-Final-Projects)
-This version of the class is very different, but it may be useful to see these.
+- use the raspberry pi 3b instead of the zero
+- use wifi instead of the cellular connection
+- remove some of the lighting features if it's too complex
