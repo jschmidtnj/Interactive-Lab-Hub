@@ -41,5 +41,8 @@ We're going to be making the ultimate umbrella - the Lightbrella. It's a clear u
 ## installation / usage
 
 - install: https://python-poetry.org/docs/#installation
+- https://python-poetry.org/docs/master/#installation
+- see https://www.adaltas.com/en/2021/06/09/pyrepo-project-initialization/
 - run `poetry shell`
 - then `python src/main.py`
+- `poetry config virtualenvs.in-project true`

@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
+from loguru import logger
 from weather import Weather
-from rpi_ws281x import PixelStrip, ws, Color
+from rpi_ws281x import Adafruit_NeoPixel, Color
 from typing import Dict, Optional, cast
 from time import sleep
 from colormath.color_objects import sRGBColor
 from webcolors import hex_to_rgb
 
-LED_STRIP: Optional[PixelStrip] = None
+LED_STRIP: Optional[Adafruit_NeoPixel] = None
 
-LED_COUNT = 40  # Number of LED pixels.
-LED_PIN = 18  # GPIO pin connected to the pixels (must support PWM!).
+LED_COUNT = 300  # Number of LED pixels.
+LED_PIN = 21  # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10  # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 50  # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
-LED_CHANNEL = 0
-LED_STRIP = ws.SK6812_STRIP_RGBW
+LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
 def rgb_to_color(hex_str: str) -> sRGBColor:
     """
@@ -32,9 +32,9 @@ WeatherColors: Dict[Weather, sRGBColor] = {
     Weather.Clear: rgb_to_color('#f2d16b'),
 }
 
-def setup_lights() -> PixelStrip:
+def setup_lights() -> Adafruit_NeoPixel:
     global LED_STRIP
-    LED_STRIP = PixelStrip(
+    LED_STRIP = Adafruit_NeoPixel(
         LED_COUNT,
         LED_PIN,
         LED_FREQ_HZ,
@@ -42,7 +42,6 @@ def setup_lights() -> PixelStrip:
         LED_INVERT,
         LED_BRIGHTNESS,
         LED_CHANNEL,
-        LED_STRIP,
     )
     return LED_STRIP
 
@@ -62,7 +61,7 @@ def wheel(pos: int) -> Color:
 
 def rainbow(iterations: int = 1, wait_ms: int = 20) -> None:
     global LED_STRIP
-    led_strip = cast(PixelStrip, LED_STRIP)
+    led_strip = cast(Adafruit_NeoPixel, LED_STRIP)
 
     for j in range(256 * iterations):
         for i in range(led_strip.numPixels()):
@@ -76,17 +75,22 @@ def set_color(color: Color) -> None:
     set color to a given color
     """
     global LED_STRIP
-    led_strip = cast(PixelStrip, LED_STRIP)
+    led_strip = cast(Adafruit_NeoPixel, LED_STRIP)
     
     for i in range(led_strip.numPixels()):
         led_strip.setPixelColor(i, color)
     led_strip.show()
 
 
+def clear() -> None:
+    set_color(Color(0, 0, 0))
+
+
 def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> None:
     """
     pulse in color
     """
+    logger.debug('start fade')
     num_steps = 256
     for i in range(num_steps):
         scale = i / float(num_steps)

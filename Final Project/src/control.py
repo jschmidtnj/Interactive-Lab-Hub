@@ -3,23 +3,28 @@
 from weather import get_weather
 from accel import is_spinning, picked_up, PICKUP_DELTA, SPIN_DELTA
 from time import sleep
-from datetime import time
-from lights import rainbow, fade_color, WeatherColors
+from datetime import datetime
+from lights import clear, rainbow, fade_color, WeatherColors
 from loguru import logger
 
 UPDATE_RATE: float = 1.0  # hz
 
 
 def control_loop() -> None:
-    last_picked_up = time() - PICKUP_DELTA
-    last_spin = time() - SPIN_DELTA
+    clear()
+
+    last_picked_up = datetime.now() - PICKUP_DELTA
+    last_spin = datetime.now() - SPIN_DELTA
     while True:
-        if last_spin + PICKUP_DELTA < time() and is_spinning():
-            last_spin = time()
+        if last_spin + PICKUP_DELTA < datetime.now() and is_spinning():
+            logger.debug('detected spin')
+            last_spin = datetime.now()
             rainbow()
-        elif last_picked_up + PICKUP_DELTA < time() and picked_up():
-            last_picked_up = time()
+            clear()
+        elif last_picked_up + PICKUP_DELTA < datetime.now() and picked_up():
+            last_picked_up = datetime.now()
             weather = get_weather()
             logger.debug(f'current weather: ${weather}')
             fade_color(WeatherColors[weather])
+            clear()
         sleep(1 / UPDATE_RATE)
