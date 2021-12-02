@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "microcontroller"
-    ]
+    ],
+    "python.formatting.provider": "black"
 }

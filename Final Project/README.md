@@ -27,3 +27,13 @@ We're going to be making the ultimate umbrella - the Lightbrella. It's a clear u
 - use the raspberry pi 3b instead of the zero
 - use wifi instead of the cellular connection
 - remove some of the lighting features if it's too complex
+
+## features
+
+- accelerometer for spinning
+
+## installation / usage
+
+- install: https://python-poetry.org/docs/#installation
+- run `poetry shell`
+- then `python src/main.py`
