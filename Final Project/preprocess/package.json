@@ -1,0 +1,15 @@
+{
+  "name": "preprocess",
+  "version": "1.0.0",
+  "description": "preprocess weather data",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "sls deploy",
+    "test": "sls invoke -f hello"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "serverless": "^2.68.0"
+  }
+}

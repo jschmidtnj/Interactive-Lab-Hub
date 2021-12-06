@@ -6,7 +6,7 @@ Description=LED Control
 # Sleep before starting
 ExecStartPre=/bin/sleep 10
 # Command to execute when the service is started
-ExecStart=/usr/bin/python3 "/home/pi/Interactive-Lab-Hub/Final Project/src/main.py"
+ExecStart=/usr/bin/python3 "/home/pi/Interactive-Lab-Hub/Final Project/embedded/src/main.py"
 
 # Disable Python's buffering of STDOUT and STDERR, so that output from the
 # service shows up immediately in systemd's logs
