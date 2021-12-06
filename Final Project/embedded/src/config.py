@@ -4,13 +4,18 @@ import os
 from typing import Optional
 from dotenv import load_dotenv
 
-OPEN_WEATHER_MAP_API_KEY: Optional[str] = None
-
+WEATHER_ENDPOINT: Optional[str] = None
+ACCESS_SECRET: Optional[str] = None
 
 def load_config() -> None:
-    global OPEN_WEATHER_MAP_API_KEY
+    global WEATHER_ENDPOINT
+    global ACCESS_SECRET
 
     load_dotenv()
-    OPEN_WEATHER_MAP_API_KEY = os.environ.get("OPEN_WEATHER_MAP_API_KEY")
-    if not OPEN_WEATHER_MAP_API_KEY:
-        raise ValueError("cannot find open weather map api key")
+
+    WEATHER_ENDPOINT = os.environ.get("WEATHER_ENDPOINT")
+    if not WEATHER_ENDPOINT:
+        raise ValueError("cannot find weather endpoint")
+    ACCESS_SECRET = os.environ.get("ACCESS_SECRET")
+    if not ACCESS_SECRET:
+        raise ValueError("cannot find access secret")

@@ -3,6 +3,13 @@ app: lightbrella
 
 frameworkVersion: '2'
 
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
 provider:
   name: aws
   runtime: python3.8
