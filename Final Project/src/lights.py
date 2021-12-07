@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from loguru import logger
+from accel import is_spinning
 from weather import Weather
 from rpi_ws281x import Adafruit_NeoPixel, Color
 from typing import Dict, Optional, cast
@@ -9,11 +10,11 @@ from webcolors import hex_to_rgb
 
 LED_STRIP: Optional[Adafruit_NeoPixel] = None
 
-LED_COUNT = 300  # Number of LED pixels.
+LED_COUNT = 404  # Number of LED pixels.
 LED_PIN = 21  # GPIO pin connected to the pixels (must support PWM!).
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10  # DMA channel to use for generating signal (try 10)
-LED_BRIGHTNESS = 50  # Set to 0 for darkest and 255 for brightest
+LED_BRIGHTNESS = 100  # Set to 0 for darkest and 255 for brightest
 LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
@@ -86,7 +87,7 @@ def clear() -> None:
     set_color(Color(0, 0, 0))
 
 
-def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> None:
+def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> bool:
     """
     pulse in color
     """
@@ -99,6 +100,8 @@ def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> Non
                                 int(color.rgb_b * scale))
         set_color(current_color)
         sleep(wait_ms / 1000.)
+        if is_spinning():
+            return True
     if fade_out:
         for i in range(num_steps, 0, -1):
             scale = i / float(num_steps)
@@ -107,3 +110,14 @@ def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> Non
                                     int(color.rgb_b * scale))
             set_color(current_color)
             sleep(wait_ms / 1000.)
+            if is_spinning():
+                return True
+    return False
+
+if __name__ == '__main__':
+    strip = setup_lights()
+    strip.begin()
+    clear()
+    sleep(1)
+    # fade_color(WeatherColors[Weather.Rain])
+    rainbow()

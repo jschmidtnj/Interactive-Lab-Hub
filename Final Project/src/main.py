@@ -4,6 +4,7 @@ from config import load_config
 from accel import setup_imu
 from control import control_loop
 from lights import setup_lights
+from loguru import logger
 
 
 def main() -> None:
@@ -11,6 +12,7 @@ def main() -> None:
     setup_imu()
     strip = setup_lights()
     strip.begin()
+    logger.info('leds set up')
     control_loop()
 
 
