@@ -49,7 +49,8 @@ def get_weather() -> Weather:
         curr_weather = WeatherMap[curr_weather_str]
         if curr_weather == Weather.Rain:
             return curr_weather
-        weather_counter.update(curr_weather)
+        weather_counter.update([curr_weather])
 
     weather = weather_counter.most_common(1)[0][0]
     return weather
+# :)
