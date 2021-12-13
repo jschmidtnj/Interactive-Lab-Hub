@@ -23,6 +23,7 @@ def control_loop() -> None:
             # weather = get_weather()
             weather = Weather.Rain
             logger.debug(f'current weather: ${weather}')
+            logger.debug(f'color: {WeatherColors[weather]}')
             weather_escape = fade_color(WeatherColors[weather])
             if not weather_escape:
                 clear()

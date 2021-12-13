@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 from loguru import logger
-from accel import is_spinning
+from accel import is_spinning, setup_imu
 from weather import Weather
 from rpi_ws281x import Adafruit_NeoPixel, Color
 from typing import Dict, Optional, cast
 from time import sleep
 from colormath.color_objects import sRGBColor
-from webcolors import hex_to_rgb
+from webcolors import hex_to_rgb, name_to_rgb
 
 LED_STRIP: Optional[Adafruit_NeoPixel] = None
 
@@ -25,13 +25,28 @@ def rgb_to_color(hex_str: str) -> sRGBColor:
     color = hex_to_rgb(hex_str)
     return sRGBColor(color.red, color.green, color.blue)
 
+def color_from_name(name: str) -> sRGBColor:
+    """
+    return a color given html5 name
+    """
+    color = name_to_rgb(name)
+    return sRGBColor(color.red, color.green, color.blue)
+
 WeatherColors: Dict[Weather, sRGBColor] = {
-    Weather.Rain: rgb_to_color('#53789e'),
+    Weather.Rain: color_from_name('seagreen'),
     Weather.Snow: rgb_to_color('#f2f3f4'),
     Weather.Extreme: rgb_to_color('#ed1c24'),
     Weather.Cloudy: rgb_to_color('#c4d3d4'),
     Weather.Clear: rgb_to_color('#f2d16b'),
 }
+
+# WeatherColors: Dict[Weather, sRGBColor] = {
+#     Weather.Rain: sRGBColor(34, 87, 122),
+#     Weather.Snow: sRGBColor(255, 248, 240),
+#     Weather.Extreme: sRGBColor(255, 70, 0),
+#     Weather.Cloudy: sRGBColor(179, 197, 215),
+#     Weather.Clear: sRGBColor(255, 250, 0),
+# }
 
 def setup_lights() -> Adafruit_NeoPixel:
     global LED_STRIP
@@ -115,9 +130,10 @@ def fade_color(color: sRGBColor, fade_out: bool = True, wait_ms: int = 5) -> boo
     return False
 
 if __name__ == '__main__':
+    setup_imu()
     strip = setup_lights()
     strip.begin()
     clear()
     sleep(1)
-    # fade_color(WeatherColors[Weather.Rain])
-    rainbow()
+    fade_color(WeatherColors[Weather.Extreme])
+    # rainbow()

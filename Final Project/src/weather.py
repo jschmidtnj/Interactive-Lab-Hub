@@ -10,12 +10,12 @@ API_BASE = "https://api.openweathermap.org/data/2.5/onecall"
 
 
 class Weather(Enum):
-    Rain = auto
-    Cloudy = auto
-    Sunny = auto
-    Snow = auto
-    Extreme = auto
-    Clear = auto
+    Rain = auto()
+    Cloudy = auto()
+    Sunny = auto()
+    Snow = auto()
+    Extreme = auto()
+    Clear = auto()
 
 
 WeatherMap: Dict[str, Weather] = {
