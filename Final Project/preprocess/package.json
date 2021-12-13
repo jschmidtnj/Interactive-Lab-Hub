@@ -1,0 +1,19 @@
+{
+  "name": "preprocess",
+  "version": "1.0.0",
+  "description": "preprocess weather data",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "npm run export-pip && sls deploy",
+    "export-pip": "poetry export -f requirements.txt > requirements.txt --without-hashes",
+    "test": "sls invoke -f hello"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "serverless": "^2.68.0"
+  },
+  "devDependencies": {
+    "serverless-python-requirements": "^5.2.2"
+  }
+}

@@ -2,29 +2,10 @@
 
 import requests
 from http import HTTPStatus
-from enum import Enum, auto
 from collections import Counter
-from typing import Dict
+from weather_enum import Weather, WeatherMap
 
 API_BASE = "https://api.openweathermap.org/data/2.5/onecall"
-
-
-class Weather(Enum):
-    Rain = auto()
-    Cloudy = auto()
-    Sunny = auto()
-    Snow = auto()
-    Extreme = auto()
-    Clear = auto()
-
-
-WeatherMap: Dict[str, Weather] = {
-    "Rain": Weather.Rain,
-    "Clouds": Weather.Cloudy,
-    "Snow": Weather.Snow,
-    "Clear": Weather.Clear,
-    "Extreme": Weather.Extreme,
-}
 
 
 def get_weather() -> Weather:
