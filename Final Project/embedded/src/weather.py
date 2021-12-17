@@ -6,13 +6,13 @@ from weather_enum import Weather
 
 
 def get_weather() -> Weather:
-    from config import ACCESS_SECRET, WEATHER_ENDPOINT
+    from config import AUTH_TOKEN, WEATHER_ENDPOINT
 
     # TODO - add current location (latitude longitude) in params
     res = requests.get(
         WEATHER_ENDPOINT,
         params={
-            "token": ACCESS_SECRET,
+            "token": AUTH_TOKEN,
         },
     )
     if res.status_code != HTTPStatus.OK:
